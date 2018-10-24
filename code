@@ -1,0 +1,89 @@
+/*# tads_inter
+Projeto Interdisciplinar TADS Segundo semestre de 2018*/
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+
+int main(){
+
+setlocale(LC_ALL, "Portuguese");
+
+    char soun;
+    int cont=0, opcao[10], data_retirada, forma_pagamento, unidades;
+    float valor_total=0, desconto;
+    float preco_produtos[10] = {4.30, 3.00, 1.39, 2.69, 3.59, 7.69, 5.99, 2.50, 28.68, 5.99}; //vetor que armazena o valor dos produtos
+
+
+    printf("**MENU DE ESCOLHA DE PRODUTOS**\n\n");
+
+    printf("*ALIMENTOS*\n");
+    printf(" 1 - Arroz | Pilecco Nobre | 1kg | R$4,30 \n 2 - Feijão | Camil | 1kg | 3,00 \n 3 - Macarrão Instantâneo | Nissin | R$1,39 \n 4 - Açúcar Refinado | União | 1kg | 2,69 \n 5 - Farinha de Trigo | Dona Benta | 1kg | 3,59\n\n");
+
+    printf("*BEBIDAS*\n");
+    printf(" 6 - Refrigerante Coca Cola | 2,5L | R$7,69 \n 7 - Refrigerante Pepsi | 1,5L | R$5,99 \n 8 - Água Mineral | Crystal | R$2,50 \n 9 - Cerveja 12 unid. | Skol | 350ml | R$28,68 \n10 - Suco de Uva Del Valle | 1L | R$5,99\n\n");
+
+    printf("____________________________________________________________________\n");
+
+    do{
+
+    printf("\nEscolha um produto: ");
+    scanf("%i", &opcao[10]);
+    if (opcao[10]>10){                  //validação das opções
+        printf("\nOPÇÃO INVÁLIDA!\n");
+    }
+
+    printf("Digite quantas unidades deseja: ");
+    scanf ("%i", &unidades);
+
+    cont = cont + 1 * unidades;     //contador para saber quantos produtos foram escolhidos
+
+    if (opcao[10] == 1){
+        valor_total = valor_total + preco_produtos[0] * unidades;
+    }if (opcao[10] == 2){
+        valor_total = valor_total + preco_produtos[1] * unidades;
+    }if (opcao[10] == 3){
+        valor_total = valor_total + preco_produtos[2] * unidades;
+    }if (opcao[10] == 4){
+        valor_total = valor_total + preco_produtos[3] * unidades;
+    }if (opcao[10] == 5){
+        valor_total = valor_total + preco_produtos[4] * unidades;
+    }if (opcao[10] == 6){
+        valor_total = valor_total + preco_produtos[5] * unidades;
+    }if (opcao[10] == 7){
+        valor_total = valor_total + preco_produtos[6] * unidades;
+    }if (opcao[10] == 8){
+        valor_total = valor_total + preco_produtos[7] * unidades;
+    }if (opcao[10] == 9){
+        valor_total = valor_total + preco_produtos[8] * unidades;
+    }if (opcao[10] == 10){
+        valor_total = valor_total + preco_produtos[9] * unidades;
+    }
+
+    printf("\nDeseja adicionar outro produto ao carrinho de compras? | S ou N | ");
+    scanf(" %c", &soun);
+    }
+    while (soun == 'S' || soun == 's');
+
+
+    printf("____________________________________________________________________\n");
+
+    printf("\nVocê escolheu %i produtos!\n", cont);
+
+    printf("\nValor total da compra = %.2f\n", valor_total);
+
+    printf("\nQual será a forma de pagamento?\n 1 - À vista \n 2 - Parcelado ");
+    scanf("%i", &forma_pagamento);
+
+    if (forma_pagamento == 1 && valor_total > 100){   //desconto de 10% para compras maiores que 100 e pagamento à vista
+        desconto = (valor_total * 10) /100;
+        valor_total = valor_total - desconto;
+        printf("\nO valor com desconto é: R$%.2f", valor_total);
+    }
+
+
+    //printf("\n\nEscolha uma data para retirar a compra em nossa loja: ");
+    //scanf("%i", &data_retirada);
+
+
+return 0;
+}
