@@ -1,5 +1,3 @@
-/*# tads_inter
-Projeto Interdisciplinar TADS Segundo semestre de 2018*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
@@ -9,26 +7,92 @@ int main(){
 setlocale(LC_ALL, "Portuguese");
 
     char soun;
-    int cont=0, opcao[10], data_retirada, forma_pagamento, unidades;
+    int i, z, cont=0, opcao[10], data_retirada, forma_pagamento, unidades;
     float valor_total=0, desconto;
-    float preco_produtos[10] = {4.30, 3.00, 1.39, 2.69, 3.59, 7.69, 5.99, 2.50, 28.68, 5.99}; //vetor que armazena o valor dos produtos
+
+     typedef struct {   // STRUCT PARA ARMAZENAR OS DADOS DO PRODUTO
+        char nome_prod[50], marca_prod[50], peso[10], litros[10];
+        int codigo_prod;
+        float preco;
+    }Produtos;
+
+    Produtos p[11];
+
+    strcpy(p[1].nome_prod, "ARROZ");   // ATRIBUIÇÃO DOS DADOS
+    strcpy(p[1].marca_prod, "PILECCO NOBRE");
+    strcpy(p[1].peso, "1KG");
+    p[1].preco = 4.30;
+    p[1].codigo_prod = 1;
+
+    strcpy(p[2].nome_prod, "FEIJÃO");
+    strcpy(p[2].marca_prod, "CAMIL");
+    strcpy(p[2].peso, "1KG");
+    p[2].preco = 3.00;
+    p[2].codigo_prod = 2;
+
+    strcpy(p[3].nome_prod, "MACARRÃO INSTANTÂNEO");
+    strcpy(p[3].marca_prod, "NISSIN");
+    strcpy(p[3].peso, "80g");
+    p[3].preco = 1.39;
+    p[3].codigo_prod = 3;
+
+    strcpy(p[4].nome_prod, "AÇÚCAR REFINADO");
+    strcpy(p[4].marca_prod, "UNIÃO");
+    strcpy(p[4].peso, "1KG");
+    p[4].preco = 2.69;
+    p[4].codigo_prod = 4;
+
+    strcpy(p[5].nome_prod, "FARINHA DE TRIGO");
+    strcpy(p[5].marca_prod, "DONA BENTA");
+    strcpy(p[5].peso, "1KG");
+    p[5].preco = 3.59;
+    p[5].codigo_prod = 5;
+
+    strcpy(p[6].nome_prod, "REFRIGERANTE COLA");
+    strcpy(p[6].marca_prod, "COCA COLA");
+    strcpy(p[6].litros, "2.5L");
+    p[6].preco = 7.69;
+    p[6].codigo_prod = 6;
+
+    strcpy(p[7].nome_prod, "REFRIGERANTE COLA");
+    strcpy(p[7].marca_prod, "PEPSI");
+    strcpy(p[7].litros, "1.5L");
+    p[7].preco = 5.99;
+    p[7].codigo_prod = 7;
+
+    strcpy(p[8].nome_prod, "ÁGUA MINERAL");
+    strcpy(p[8].marca_prod, "CRYSTAL");
+    strcpy(p[8].litros, "500ml");
+    p[8].preco = 2.50;
+    p[8].codigo_prod = 8;
+
+    strcpy(p[9].nome_prod, "CERVEJA 12 UNID.");
+    strcpy(p[9].marca_prod, "SKOL");
+    strcpy(p[9].litros, "350ml");
+    p[9].preco = 28.68;
+    p[9].codigo_prod = 9;
+
+    strcpy(p[10].nome_prod, "SUCO DE UVA");
+    strcpy(p[10].marca_prod, "DEL VALLE");
+    strcpy(p[10].litros, "1L");
+    p[10].preco = 5.99;
+    p[10].codigo_prod = 10;
 
 
-    printf("**MENU DE ESCOLHA DE PRODUTOS**\n\n");
+    for (i = 1; i <= 5; i++){ //  MOSTRANDO OS DADOS NA TELA
+        printf ("\nNOME DO PRODUTO: %s \nMARCA: %s \nPESO: %s \nPREÇO: R$%.2f \nCódigo: %i \n", p[i].nome_prod, p[i].marca_prod, p[i].peso, p[i].preco, p[i].codigo_prod);
+    }
+    for (z = 6; z <= 10; z++){
+        printf ("\nNOME DO PRODUTO: %s \nMARCA: %s \nLITROS: %s \nPREÇO: R$%.2f \nCódigo: %i \n", p[z].nome_prod, p[z].marca_prod, p[z].litros, p[z].preco, p[z].codigo_prod);
+    }
 
-    printf("*ALIMENTOS*\n");
-    printf(" 1 - Arroz | Pilecco Nobre | 1kg | R$4,30 \n 2 - Feijão | Camil | 1kg | 3,00 \n 3 - Macarrão Instantâneo | Nissin | R$1,39 \n 4 - Açúcar Refinado | União | 1kg | 2,69 \n 5 - Farinha de Trigo | Dona Benta | 1kg | 3,59\n\n");
 
-    printf("*BEBIDAS*\n");
-    printf(" 6 - Refrigerante Coca Cola | 2,5L | R$7,69 \n 7 - Refrigerante Pepsi | 1,5L | R$5,99 \n 8 - Água Mineral | Crystal | R$2,50 \n 9 - Cerveja 12 unid. | Skol | 350ml | R$28,68 \n10 - Suco de Uva Del Valle | 1L | R$5,99\n\n");
-
-    printf("____________________________________________________________________\n");
 
     do{
 
-    printf("\nEscolha um produto: ");
-    scanf("%i", &opcao[10]);
-    if (opcao[10]>10){                  //validação das opções
+    printf("\nEscolha um produto digitando seu código: ");
+    scanf("%i", &p[i].codigo_prod);
+    if (p[i].codigo_prod > 10){                  //validação das opções
         printf("\nOPÇÃO INVÁLIDA!\n");
     }
 
@@ -37,27 +101,28 @@ setlocale(LC_ALL, "Portuguese");
 
     cont = cont + 1 * unidades;     //contador para saber quantos produtos foram escolhidos
 
-    if (opcao[10] == 1){
-        valor_total = valor_total + preco_produtos[0] * unidades;
-    }if (opcao[10] == 2){
-        valor_total = valor_total + preco_produtos[1] * unidades;
-    }if (opcao[10] == 3){
-        valor_total = valor_total + preco_produtos[2] * unidades;
-    }if (opcao[10] == 4){
-        valor_total = valor_total + preco_produtos[3] * unidades;
-    }if (opcao[10] == 5){
-        valor_total = valor_total + preco_produtos[4] * unidades;
-    }if (opcao[10] == 6){
-        valor_total = valor_total + preco_produtos[5] * unidades;
-    }if (opcao[10] == 7){
-        valor_total = valor_total + preco_produtos[6] * unidades;
-    }if (opcao[10] == 8){
-        valor_total = valor_total + preco_produtos[7] * unidades;
-    }if (opcao[10] == 9){
-        valor_total = valor_total + preco_produtos[8] * unidades;
-    }if (opcao[10] == 10){
-        valor_total = valor_total + preco_produtos[9] * unidades;
+    if (p[i].codigo_prod == 1){
+        valor_total = valor_total + p[1].preco * unidades; // CALCULO DO VALOR TOTAL DOS PRODUTOS ESCOLHIDOS
+    }if (p[i].codigo_prod == 2){
+        valor_total = valor_total + p[2].preco * unidades;
+    }if (p[i].codigo_prod == 3){
+        valor_total = valor_total + p[3].preco * unidades;
+    }if (p[i].codigo_prod == 4){
+        valor_total = valor_total + p[4].preco * unidades;
+    }if (p[i].codigo_prod == 5){
+        valor_total = valor_total + p[5].preco * unidades;
+    }if (p[i].codigo_prod == 6){
+        valor_total = valor_total + p[6].preco * unidades;
+    }if (p[i].codigo_prod == 7){
+        valor_total = valor_total + p[7].preco * unidades;
+    }if (p[i].codigo_prod == 8){
+        valor_total = valor_total + p[8].preco * unidades;
+    }if (p[i].codigo_prod == 9){
+        valor_total = valor_total + p[9].preco * unidades;
+    }if (p[i].codigo_prod == 10){
+        valor_total = valor_total + p[10].preco * unidades;
     }
+
 
     printf("\nDeseja adicionar outro produto ao carrinho de compras? | S ou N | ");
     scanf(" %c", &soun);
@@ -67,9 +132,9 @@ setlocale(LC_ALL, "Portuguese");
 
     printf("____________________________________________________________________\n");
 
-    printf("\nVocê escolheu %i produtos!\n", cont);
+    printf("\nVocê escolheu %i itens!\n", cont);
 
-    printf("\nValor total da compra = %.2f\n", valor_total);
+    printf("\nValor total da compra = R$%.2f\n", valor_total);
 
     printf("\nQual será a forma de pagamento?\n 1 - À vista \n 2 - Parcelado ");
     scanf("%i", &forma_pagamento);
