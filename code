@@ -7,7 +7,7 @@ int main(){
 setlocale(LC_ALL, "Portuguese");
 
     char soun;
-    int i, z, cont=0, opcao[10], data_retirada, forma_pagamento, unidades;
+    int i, z, x, cont=0, opcao[10], data_retirada, forma_pagamento, unidades;
     float valor_total=0, desconto;
 
      typedef struct {   // STRUCT PARA ARMAZENAR OS DADOS DO PRODUTO
@@ -16,7 +16,9 @@ setlocale(LC_ALL, "Portuguese");
         float preco;
     }Produtos;
 
-    Produtos p[11];
+    Produtos p[16];
+
+    //ALIMENTOS//
 
     strcpy(p[1].nome_prod, "ARROZ");   // ATRIBUIÇÃO DOS DADOS
     strcpy(p[1].marca_prod, "PILECCO NOBRE");
@@ -48,6 +50,9 @@ setlocale(LC_ALL, "Portuguese");
     p[5].preco = 3.59;
     p[5].codigo_prod = 5;
 
+
+    //BEBIDAS//
+
     strcpy(p[6].nome_prod, "REFRIGERANTE COLA");
     strcpy(p[6].marca_prod, "COCA COLA");
     strcpy(p[6].litros, "2.5L");
@@ -78,21 +83,59 @@ setlocale(LC_ALL, "Portuguese");
     p[10].preco = 5.99;
     p[10].codigo_prod = 10;
 
+    //LIMPEZA//
 
-    for (i = 1; i <= 5; i++){ //  MOSTRANDO OS DADOS NA TELA
+
+    strcpy(p[11].nome_prod, "DETERGENTE NEUTRO");
+    strcpy(p[11].marca_prod, "YPÊ");
+    strcpy(p[11].litros, "500ml");
+    p[11].preco = 2.16;
+    p[11].codigo_prod = 11;
+
+    strcpy(p[12].nome_prod, "SABÃO LÍQUIDO");
+    strcpy(p[12].marca_prod, "OMO");
+    strcpy(p[12].litros, "3L");
+    p[12].preco = 26.90;
+    p[12].codigo_prod = 12;
+
+    strcpy(p[13].nome_prod, "ÁGUA SANITÁRIA");
+    strcpy(p[13].marca_prod, "SUPER CÂNDIDA");
+    strcpy(p[13].litros, "2L");
+    p[13].preco = 5.57;
+    p[13].codigo_prod = 13;
+
+    strcpy(p[14].nome_prod, "PAPEL HIGIÊNICO");
+    strcpy(p[14].marca_prod, "PERSONAL VIP");
+    p[14].preco = 13.76;
+    p[14].codigo_prod = 14;
+
+    strcpy(p[15].nome_prod, "ESPONJA DE LIMPEZA 3 UNID.");
+    strcpy(p[15].marca_prod, "SCOTCH-BRITE");
+    p[15].preco = 5.19;
+    p[15].codigo_prod = 15;
+
+
+
+
+    for (i = 1; i <= 5; i++){ //  MOSTRANDO OS DADOS DOS ALIMENTOS
         printf ("\nNOME DO PRODUTO: %s \nMARCA: %s \nPESO: %s \nPREÇO: R$%.2f \nCódigo: %i \n", p[i].nome_prod, p[i].marca_prod, p[i].peso, p[i].preco, p[i].codigo_prod);
     }
-    for (z = 6; z <= 10; z++){
+    for (z = 6; z <= 10; z++){ //  MOSTRANDO OS DADOS DAS BEBIDAS
         printf ("\nNOME DO PRODUTO: %s \nMARCA: %s \nLITROS: %s \nPREÇO: R$%.2f \nCódigo: %i \n", p[z].nome_prod, p[z].marca_prod, p[z].litros, p[z].preco, p[z].codigo_prod);
     }
-
+    for (x = 11; x <= 13; x++){ //  MOSTRANDO OS DADOS DOS PRODUROS DE LIMPEZA
+        printf ("\nNOME DO PRODUTO: %s \nMARCA: %s \nLITROS: %s \nPREÇO: R$%.2f \nCódigo: %i \n", p[x].nome_prod, p[x].marca_prod, p[x].litros, p[x].preco, p[x].codigo_prod);
+    }
+    for (x = 14; x <= 15; x++){ //  MOSTRANDO OS DADOS DOS PRODUROS DE LIMPEZA
+        printf ("\nNOME DO PRODUTO: %s \nMARCA: %s \nPREÇO: R$%.2f \nCódigo: %i \n", p[x].nome_prod, p[x].marca_prod, p[x].preco, p[x].codigo_prod);
+    }
 
 
     do{
 
     printf("\nEscolha um produto digitando seu código: ");
     scanf("%i", &p[i].codigo_prod);
-    if (p[i].codigo_prod > 10){                  //validação das opções
+    if (p[i].codigo_prod > 15){                  //validação das opções
         printf("\nOPÇÃO INVÁLIDA!\n");
     }
 
@@ -121,6 +164,16 @@ setlocale(LC_ALL, "Portuguese");
         valor_total = valor_total + p[9].preco * unidades;
     }if (p[i].codigo_prod == 10){
         valor_total = valor_total + p[10].preco * unidades;
+    }if (p[i].codigo_prod == 11){
+        valor_total = valor_total + p[11].preco * unidades;
+    }if (p[i].codigo_prod == 12){
+        valor_total = valor_total + p[12].preco * unidades;
+    }if (p[i].codigo_prod == 13){
+        valor_total = valor_total + p[13].preco * unidades;
+    }if (p[i].codigo_prod == 14){
+        valor_total = valor_total + p[14].preco * unidades;
+    }if (p[i].codigo_prod == 15){
+        valor_total = valor_total + p[15].preco * unidades;
     }
 
 
