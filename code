@@ -1,20 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
+#include <string.h>
+
+typedef struct {   // STRUCT PARA ARMAZENAR OS DADOS DO PRODUTO
+        char nome_prod[50], marca_prod[50], peso[50], litros[50];
+        int codigo_prod;
+        float preco;
+    }Produtos;
+
+
 
 int main(){
 
 setlocale(LC_ALL, "Portuguese");
 
     char soun;
-    int i, z, x, y, cont=0, opcao[10], data_retirada, forma_pagamento, unidades;
+    int i, z, x, j, cont=0, opcao[10], data_retirada, forma_pagamento, unidades, opcao_menu, cod_escolha;
     float valor_total=0, desconto;
 
-     typedef struct {   // STRUCT PARA ARMAZENAR OS DADOS DO PRODUTO
-        char nome_prod[50], marca_prod[50], peso[50], litros[50];
-        int codigo_prod;
-        float preco;
-    }Produtos;
 
     Produtos p[21];
 
@@ -129,9 +133,9 @@ setlocale(LC_ALL, "Portuguese");
     p[17].preco = 16.90;
     p[17].codigo_prod = 17;
 
-    strcpy(p[18].nome_prod, "ESCOVA DE DENTE 2 UNID.");
+    strcpy(p[18].nome_prod, "FIO DENTAL");
     strcpy(p[18].marca_prod, "COLGATE");
-    p[18].preco = 16.90;
+    p[18].preco = 7.82;
     p[18].codigo_prod = 18;
 
     strcpy(p[19].nome_prod, "CREME DENTAL");
@@ -145,86 +149,129 @@ setlocale(LC_ALL, "Portuguese");
     p[20].codigo_prod = 20;
 
 
+    printf("BEM VINDO A MERCEARIA ONLINE\n");
 
 
-
-    for (i = 1; i <= 5; i++){ //  MOSTRANDO OS DADOS DOS ALIMENTOS
-        printf ("\nNOME DO PRODUTO: %s \nMARCA: %s \nPESO: %s \nPREÇO: R$%.2f \nCódigo: %i \n", p[i].nome_prod, p[i].marca_prod, p[i].peso, p[i].preco, p[i].codigo_prod);
-    }
-    for (z = 6; z <= 10; z++){ //  MOSTRANDO OS DADOS DAS BEBIDAS
-        printf ("\nNOME DO PRODUTO: %s \nMARCA: %s \nLITROS: %s \nPREÇO: R$%.2f \nCódigo: %i \n", p[z].nome_prod, p[z].marca_prod, p[z].litros, p[z].preco, p[z].codigo_prod);
-    }
-    for (x = 11; x <= 14; x++){ //  MOSTRANDO OS DADOS DOS PRODUROS DE LIMPEZA
-        printf ("\nNOME DO PRODUTO: %s \nMARCA: %s \nLITROS: %s \nPREÇO: R$%.2f \nCódigo: %i \n", p[x].nome_prod, p[x].marca_prod, p[x].litros, p[x].preco, p[x].codigo_prod);
-    }
-    for (x = 15; x <= 20; x++){ //  MOSTRANDO OS DADOS DOS PRODUROS DE HIGIENE
-        printf ("\nNOME DO PRODUTO: %s \nMARCA: %s \nPREÇO: R$%.2f \nCódigo: %i \n", p[x].nome_prod, p[x].marca_prod, p[x].preco, p[x].codigo_prod);
-    }
-
+    //MENU DE OPÇÕES
 
     do{
 
-    printf("\nEscolha um produto digitando seu código: ");
-    scanf("%i", &p[i].codigo_prod);
-    if (p[i].codigo_prod > 20){                  //validação das opções
-        printf("\nOPÇÃO INVÁLIDA!\n");
-    }
+        printf("\n\tMENU DE OPÇÕES\n");
+        printf("\n1 - Alimentos\n");
+        printf("2 - Bebidas\n");
+        printf("3 - Produtos de Limpeza\n");
+        printf("4 - Produtos de Higiêne\n");
+        printf("5 - Finalizar\n");
+        printf("\nDigite o número da opção desejada: ");
+        scanf("%i",&opcao_menu);
+        system("cls"); //LIMPA A TELA
 
-    printf("Digite quantas unidades deseja: ");
-    scanf ("%i", &unidades);
+        switch(opcao_menu){
+            case 1:
+                for (i = 1; i <= 5; i++){ //  MOSTRANDO OS DADOS DOS ALIMENTOS
+                        printf ("\nNOME DO PRODUTO: %s \nMARCA: %s \nPESO: %s \nPREÇO: R$%.2f \nCódigo: %i \n", p[i].nome_prod, p[i].marca_prod, p[i].peso, p[i].preco, p[i].codigo_prod);
+                }
+                break;
 
-    cont = cont + 1 * unidades;     //contador para saber quantos produtos foram escolhidos
+            case 2:
+                for (z = 6; z <= 10; z++){ //  MOSTRANDO OS DADOS DAS BEBIDAS
+                    printf ("\nNOME DO PRODUTO: %s \nMARCA: %s \nLITROS: %s \nPREÇO: R$%.2f \nCódigo: %i \n", p[z].nome_prod, p[z].marca_prod, p[z].litros, p[z].preco, p[z].codigo_prod);
+                }
+                break;
 
-    if (p[i].codigo_prod == 1){
-        valor_total = valor_total + p[1].preco * unidades; // CALCULO DO VALOR TOTAL DOS PRODUTOS ESCOLHIDOS
-    }if (p[i].codigo_prod == 2){
-        valor_total = valor_total + p[2].preco * unidades;
-    }if (p[i].codigo_prod == 3){
-        valor_total = valor_total + p[3].preco * unidades;
-    }if (p[i].codigo_prod == 4){
-        valor_total = valor_total + p[4].preco * unidades;
-    }if (p[i].codigo_prod == 5){
-        valor_total = valor_total + p[5].preco * unidades;
-    }if (p[i].codigo_prod == 6){
-        valor_total = valor_total + p[6].preco * unidades;
-    }if (p[i].codigo_prod == 7){
-        valor_total = valor_total + p[7].preco * unidades;
-    }if (p[i].codigo_prod == 8){
-        valor_total = valor_total + p[8].preco * unidades;
-    }if (p[i].codigo_prod == 9){
-        valor_total = valor_total + p[9].preco * unidades;
-    }if (p[i].codigo_prod == 10){
-        valor_total = valor_total + p[10].preco * unidades;
-    }if (p[i].codigo_prod == 11){
-        valor_total = valor_total + p[11].preco * unidades;
-    }if (p[i].codigo_prod == 12){
-        valor_total = valor_total + p[12].preco * unidades;
-    }if (p[i].codigo_prod == 13){
-        valor_total = valor_total + p[13].preco * unidades;
-    }if (p[i].codigo_prod == 14){
-        valor_total = valor_total + p[14].preco * unidades;
-    }if (p[i].codigo_prod == 15){
-        valor_total = valor_total + p[15].preco * unidades;
-    }if (p[i].codigo_prod == 16){
-        valor_total = valor_total + p[16].preco * unidades;
-    }if (p[i].codigo_prod == 17){
-        valor_total = valor_total + p[17].preco * unidades;
-    }if (p[i].codigo_prod == 18){
-        valor_total = valor_total + p[18].preco * unidades;
-    }if (p[i].codigo_prod == 19){
-        valor_total = valor_total + p[19].preco * unidades;
-    }if (p[i].codigo_prod == 20){
-        valor_total = valor_total + p[20].preco * unidades;
-    }
+            case 3:
+                for (x = 11; x <= 15; x++){ //  MOSTRANDO OS DADOS DOS PRODUROS DE LIMPEZA
+                    printf ("\nNOME DO PRODUTO: %s \nMARCA: %s \nLITROS: %s \nPREÇO: R$%.2f \nCódigo: %i \n", p[x].nome_prod, p[x].marca_prod, p[x].litros, p[x].preco, p[x].codigo_prod);
+                }
+                break;
+
+            case 4:
+            	for (j = 16; j <= 20; j++){ //  MOSTRANDO OS DADOS DOS PRODUROS DE HIGIENE
+                    printf ("\nNOME DO PRODUTO: %s \nMARCA: %s \nPREÇO: R$%.2f \nCódigo: %i \n", p[j].nome_prod, p[j].marca_prod, p[j].preco, p[j].codigo_prod);
+                }
+            	break;
+
+            case 5:
+                system("cls"); //LIMPA A TELA
+                printf("FIM DA COMPRA!\n");
+                return 0; //FECHA O PROGRAMA
+
+                break;
+            default:
+                printf("OPÇÃO INVáLIDA!\nTENTE NOVAMENTE:\n");
+                break;
+        }
+
+    }while(opcao_menu>5);
 
 
-    printf("\nDeseja adicionar outro produto ao carrinho de compras? | S ou N | ");
-    scanf(" %c", &soun);
+    //FIM MENU DAS OPÇÕES
+
+    do{
+
+        printf("\nEscolha um produto digitando seu código: ");
+        scanf("%i", &cod_escolha);
+
+        if (cod_escolha > 20){                  //validação das opções
+            printf("\nOPÇÃO INVÁLIDA!\n");
+        }
+
+        printf("Digite quantas unidades deseja: ");
+        scanf ("%i", &unidades);
+
+        cont = cont + 1 * unidades;     //contador para saber quantos produtos foram escolhidos
+
+        if (cod_escolha == 1){
+            valor_total = valor_total + p[1].preco * unidades; // CALCULO DO VALOR TOTAL DOS PRODUTOS ESCOLHIDOS
+        }if (cod_escolha == 2){
+            valor_total = valor_total + p[2].preco * unidades;
+        }if (cod_escolha == 3){
+            valor_total = valor_total + p[3].preco * unidades;
+        }if (cod_escolha == 4){
+            valor_total = valor_total + p[4].preco * unidades;
+        }if (cod_escolha == 5){
+            valor_total = valor_total + p[5].preco * unidades;
+        }if (cod_escolha == 6){
+            valor_total = valor_total + p[6].preco * unidades;
+        }if (cod_escolha == 7){
+            valor_total = valor_total + p[7].preco * unidades;
+        }if (cod_escolha == 8){
+            valor_total = valor_total + p[8].preco * unidades;
+        }if (cod_escolha == 9){
+            valor_total = valor_total + p[9].preco * unidades;
+        }if (cod_escolha == 10){
+            valor_total = valor_total + p[10].preco * unidades;
+        }if (cod_escolha == 11){
+            valor_total = valor_total + p[11].preco * unidades;
+        }if (cod_escolha == 12){
+            valor_total = valor_total + p[12].preco * unidades;
+        }if (cod_escolha == 13){
+            valor_total = valor_total + p[13].preco * unidades;
+        }if (cod_escolha == 14){
+            valor_total = valor_total + p[14].preco * unidades;
+        }if (cod_escolha == 15){
+            valor_total = valor_total + p[15].preco * unidades;
+        }if (cod_escolha == 16){
+            valor_total = valor_total + p[16].preco * unidades;
+        }if (cod_escolha == 17){
+            valor_total = valor_total + p[17].preco * unidades;
+        }if (cod_escolha == 18){
+            valor_total = valor_total + p[18].preco * unidades;
+        }if (cod_escolha == 19){
+            valor_total = valor_total + p[19].preco * unidades;
+        }if (cod_escolha == 20){
+            valor_total = valor_total + p[20].preco * unidades;
+        }
+
+
+        printf("\nDeseja adicionar outro produto ao carrinho de compras? | S ou N | ");
+        scanf(" %c", &soun);
     }
     while (soun == 'S' || soun == 's');
 
+    system("cls"); //LIMPA A TELA
 
-    printf("____________________________________________________________________\n");
+    
 
     printf("\nVocê escolheu %i itens!\n", cont);
 
