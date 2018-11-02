@@ -156,7 +156,7 @@ void menu(){
         printf("2 - Bebidas\n");
         printf("3 - Produtos de Limpeza\n");
         printf("4 - Produtos de Higiêne\n");
-        printf("5 - Finalizar\n");
+        printf("5 - Sair\n");
         printf("\nDigite o número da opção desejada: ");
         scanf("%i",&opcao_menu);
         system("cls"); //LIMPA A TELA
