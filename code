@@ -10,17 +10,11 @@ typedef struct {   // STRUCT PARA ARMAZENAR OS DADOS DO PRODUTO
     }Produtos;
 
 
+void menu(){
 
-int main(){
+    int i, z, x, j, opcao_menu;
 
-setlocale(LC_ALL, "Portuguese");
-
-    char soun;
-    int i, z, x, j, cont=0, opcao[10], data_retirada, forma_pagamento, unidades, opcao_menu, cod_escolha;
-    float valor_total=0, desconto;
-
-
-    Produtos p[21];
+        Produtos p[21];
 
 
     //ALIMENTOS//
@@ -149,6 +143,7 @@ setlocale(LC_ALL, "Portuguese");
     p[20].codigo_prod = 20;
 
 
+
     printf("BEM VINDO A MERCEARIA ONLINE\n");
 
 
@@ -207,88 +202,250 @@ setlocale(LC_ALL, "Portuguese");
 
     //FIM MENU DAS OPÇÕES
 
+
+
+}
+
+
+
+int main(){
+
+setlocale(LC_ALL, "Portuguese");
+
+    char soun;
+    int cont=0, opcao[10], data_retirada, forma_pagamento, unidades, cod_escolha, resposta;
+    float valor_total=0, desconto;
+
+
+                                /* DECLARAÇÃO DOS PRODUTOS */
+
+        Produtos p[21];
+
+    //ALIMENTOS//
+
+    strcpy(p[1].nome_prod, "ARROZ");   // ATRIBUIÇÃO DOS DADOS
+    strcpy(p[1].marca_prod, "PILECCO NOBRE");
+    strcpy(p[1].peso, "1KG");
+    p[1].preco = 4.30;
+    p[1].codigo_prod = 1;
+
+    strcpy(p[2].nome_prod, "FEIJÃO");
+    strcpy(p[2].marca_prod, "CAMIL");
+    strcpy(p[2].peso, "1KG");
+    p[2].preco = 3.00;
+    p[2].codigo_prod = 2;
+
+    strcpy(p[3].nome_prod, "MACARRÃO INSTANTÂNEO");
+    strcpy(p[3].marca_prod, "NISSIN");
+    strcpy(p[3].peso, "80g");
+    p[3].preco = 1.39;
+    p[3].codigo_prod = 3;
+
+    strcpy(p[4].nome_prod, "AÇÚCAR REFINADO");
+    strcpy(p[4].marca_prod, "UNIÃO");
+    strcpy(p[4].peso, "1KG");
+    p[4].preco = 2.69;
+    p[4].codigo_prod = 4;
+
+    strcpy(p[5].nome_prod, "FARINHA DE TRIGO");
+    strcpy(p[5].marca_prod, "DONA BENTA");
+    strcpy(p[5].peso, "1KG");
+    p[5].preco = 3.59;
+    p[5].codigo_prod = 5;
+
+
+    //BEBIDAS//
+
+    strcpy(p[6].nome_prod, "REFRIGERANTE COLA");
+    strcpy(p[6].marca_prod, "COCA COLA");
+    strcpy(p[6].litros, "2.5L");
+    p[6].preco = 7.69;
+    p[6].codigo_prod = 6;
+
+    strcpy(p[7].nome_prod, "REFRIGERANTE COLA");
+    strcpy(p[7].marca_prod, "PEPSI");
+    strcpy(p[7].litros, "1.5L");
+    p[7].preco = 5.99;
+    p[7].codigo_prod = 7;
+
+    strcpy(p[8].nome_prod, "ÁGUA MINERAL");
+    strcpy(p[8].marca_prod, "CRYSTAL");
+    strcpy(p[8].litros, "500ml");
+    p[8].preco = 2.50;
+    p[8].codigo_prod = 8;
+
+    strcpy(p[9].nome_prod, "CERVEJA 12 UNID.");
+    strcpy(p[9].marca_prod, "SKOL");
+    strcpy(p[9].litros, "350ml");
+    p[9].preco = 28.68;
+    p[9].codigo_prod = 9;
+
+    strcpy(p[10].nome_prod, "SUCO DE UVA");
+    strcpy(p[10].marca_prod, "DEL VALLE");
+    strcpy(p[10].litros, "1L");
+    p[10].preco = 5.99;
+    p[10].codigo_prod = 10;
+
+
+    //LIMPEZA//
+
+    strcpy(p[11].nome_prod, "DETERGENTE NEUTRO");
+    strcpy(p[11].marca_prod, "YPÊ");
+    strcpy(p[11].litros, "500ml");
+    p[11].preco = 2.16;
+    p[11].codigo_prod = 11;
+
+    strcpy(p[12].nome_prod, "SABÃO LÍQUIDO");
+    strcpy(p[12].marca_prod, "OMO");
+    strcpy(p[12].litros, "3L");
+    p[12].preco = 26.90;
+    p[12].codigo_prod = 12;
+
+    strcpy(p[13].nome_prod, "ÁGUA SANITÁRIA");
+    strcpy(p[13].marca_prod, "SUPER CÂNDIDA");
+    strcpy(p[13].litros, "2L");
+    p[13].preco = 5.57;
+    p[13].codigo_prod = 13;
+
+    strcpy(p[14].nome_prod, "DESINFETANTE");
+    strcpy(p[14].marca_prod, "OMO");
+    strcpy(p[14].litros, "900ml");
+    p[14].preco = 8.99;
+    p[14].codigo_prod = 14;
+
+    strcpy(p[15].nome_prod, "ESPONJA DE LIMPEZA 3 UNID.");
+    strcpy(p[15].marca_prod, "SCOTCH-BRITE");
+    p[15].preco = 5.19;
+    p[15].codigo_prod = 15;
+
+
+    // HIGIENE //
+
+    strcpy(p[16].nome_prod, "PAPEL HIGIÊNICO");
+    strcpy(p[16].marca_prod, "PERSONAL VIP");
+    p[16].preco = 13.76;
+    p[16].codigo_prod = 16;
+
+    strcpy(p[17].nome_prod, "ESCOVA DE DENTE 2 UNID.");
+    strcpy(p[17].marca_prod, "COLGATE");
+    p[17].preco = 16.90;
+    p[17].codigo_prod = 17;
+
+    strcpy(p[18].nome_prod, "FIO DENTAL");
+    strcpy(p[18].marca_prod, "COLGATE");
+    p[18].preco = 7.82;
+    p[18].codigo_prod = 18;
+
+    strcpy(p[19].nome_prod, "CREME DENTAL");
+    strcpy(p[19].marca_prod, "CLOSE UP");
+    p[19].preco = 6.13;
+    p[19].codigo_prod = 19;
+
+    strcpy(p[20].nome_prod, "SABONETE EM BARRA");
+    strcpy(p[20].marca_prod, "DOVE");
+    p[20].preco = 2.31;
+    p[20].codigo_prod = 20;
+
+                                /* FIM DECLARAÇÃO DOS PRODUTOS */
+
     do{
 
-        printf("\nEscolha um produto digitando seu código: ");
-        scanf("%i", &cod_escolha);
+        menu(); //CHAMA A FUNÇÃO MENU
 
-        if (cod_escolha > 20){                  //validação das opções
-            printf("\nOPÇÃO INVÁLIDA!\n");
+        do{
+
+            printf("\nEscolha um produto digitando seu código: ");
+            scanf("%i", &cod_escolha);
+
+            if (cod_escolha > 20){                  //validação das opções
+                printf("\nOPÇÃO INVÁLIDA!\n");
+            }
+
+            printf("Digite quantas unidades deseja: ");
+            scanf ("%i", &unidades);
+
+            cont = cont + 1 * unidades;     //contador para saber quantos produtos foram escolhidos
+
+            if (cod_escolha == 1){
+                valor_total = valor_total + p[1].preco * unidades; // CALCULO DO VALOR TOTAL DOS PRODUTOS ESCOLHIDOS
+            }if (cod_escolha == 2){
+                valor_total = valor_total + p[2].preco * unidades;
+            }if (cod_escolha == 3){
+                valor_total = valor_total + p[3].preco * unidades;
+            }if (cod_escolha == 4){
+                valor_total = valor_total + p[4].preco * unidades;
+            }if (cod_escolha == 5){
+                valor_total = valor_total + p[5].preco * unidades;
+            }if (cod_escolha == 6){
+                valor_total = valor_total + p[6].preco * unidades;
+            }if (cod_escolha == 7){
+                valor_total = valor_total + p[7].preco * unidades;
+            }if (cod_escolha == 8){
+                valor_total = valor_total + p[8].preco * unidades;
+            }if (cod_escolha == 9){
+                valor_total = valor_total + p[9].preco * unidades;
+            }if (cod_escolha == 10){
+                valor_total = valor_total + p[10].preco * unidades;
+            }if (cod_escolha == 11){
+                valor_total = valor_total + p[11].preco * unidades;
+            }if (cod_escolha == 12){
+                valor_total = valor_total + p[12].preco * unidades;
+            }if (cod_escolha == 13){
+                valor_total = valor_total + p[13].preco * unidades;
+            }if (cod_escolha == 14){
+                valor_total = valor_total + p[14].preco * unidades;
+            }if (cod_escolha == 15){
+                valor_total = valor_total + p[15].preco * unidades;
+            }if (cod_escolha == 16){
+                valor_total = valor_total + p[16].preco * unidades;
+            }if (cod_escolha == 17){
+                valor_total = valor_total + p[17].preco * unidades;
+            }if (cod_escolha == 18){
+                valor_total = valor_total + p[18].preco * unidades;
+            }if (cod_escolha == 19){
+                valor_total = valor_total + p[19].preco * unidades;
+            }if (cod_escolha == 20){
+                valor_total = valor_total + p[20].preco * unidades;
+            }
+
+
+            printf("\nEscolha uma opção: \n1 - Voltar para o menu \n2 - Adcionar ao carrinho outro produto da mesma categoria \n3 - Finalizar a compra\n ");
+            scanf("%i", &resposta);
+
+            if(resposta == 1){
+
+                system("cls"); //LIMPA A TELA
+
+            }
+
+            if(resposta == 3){
+                system("cls"); //LIMPA A TELA
+
+                printf("\nVocê escolheu %i itens!\n", cont);
+
+                printf("\nValor total da compra = R$%.2f\n", valor_total);
+
+                printf("\nQual será a forma de pagamento?\n 1 - À vista \n 2 - Parcelado ");
+                scanf("%i", &forma_pagamento);
+
+                if (forma_pagamento == 1 && valor_total > 100){   //desconto de 10% para compras maiores que 100 e pagamento à vista
+                    desconto = (valor_total * 10) /100;
+                    valor_total = valor_total - desconto;
+                    printf("\nO valor com desconto é: R$%.2f", valor_total);
+                }
+
+
+                //printf("\n\nEscolha uma data para retirar a compra em nossa loja: ");
+                //scanf("%i", &data_retirada);
+
+
+            }
+
         }
+        while (resposta == 2);
 
-        printf("Digite quantas unidades deseja: ");
-        scanf ("%i", &unidades);
-
-        cont = cont + 1 * unidades;     //contador para saber quantos produtos foram escolhidos
-
-        if (cod_escolha == 1){
-            valor_total = valor_total + p[1].preco * unidades; // CALCULO DO VALOR TOTAL DOS PRODUTOS ESCOLHIDOS
-        }if (cod_escolha == 2){
-            valor_total = valor_total + p[2].preco * unidades;
-        }if (cod_escolha == 3){
-            valor_total = valor_total + p[3].preco * unidades;
-        }if (cod_escolha == 4){
-            valor_total = valor_total + p[4].preco * unidades;
-        }if (cod_escolha == 5){
-            valor_total = valor_total + p[5].preco * unidades;
-        }if (cod_escolha == 6){
-            valor_total = valor_total + p[6].preco * unidades;
-        }if (cod_escolha == 7){
-            valor_total = valor_total + p[7].preco * unidades;
-        }if (cod_escolha == 8){
-            valor_total = valor_total + p[8].preco * unidades;
-        }if (cod_escolha == 9){
-            valor_total = valor_total + p[9].preco * unidades;
-        }if (cod_escolha == 10){
-            valor_total = valor_total + p[10].preco * unidades;
-        }if (cod_escolha == 11){
-            valor_total = valor_total + p[11].preco * unidades;
-        }if (cod_escolha == 12){
-            valor_total = valor_total + p[12].preco * unidades;
-        }if (cod_escolha == 13){
-            valor_total = valor_total + p[13].preco * unidades;
-        }if (cod_escolha == 14){
-            valor_total = valor_total + p[14].preco * unidades;
-        }if (cod_escolha == 15){
-            valor_total = valor_total + p[15].preco * unidades;
-        }if (cod_escolha == 16){
-            valor_total = valor_total + p[16].preco * unidades;
-        }if (cod_escolha == 17){
-            valor_total = valor_total + p[17].preco * unidades;
-        }if (cod_escolha == 18){
-            valor_total = valor_total + p[18].preco * unidades;
-        }if (cod_escolha == 19){
-            valor_total = valor_total + p[19].preco * unidades;
-        }if (cod_escolha == 20){
-            valor_total = valor_total + p[20].preco * unidades;
-        }
-
-
-        printf("\nDeseja adicionar outro produto ao carrinho de compras? | S ou N | ");
-        scanf(" %c", &soun);
     }
-    while (soun == 'S' || soun == 's');
-
-    system("cls"); //LIMPA A TELA
-
-    
-
-    printf("\nVocê escolheu %i itens!\n", cont);
-
-    printf("\nValor total da compra = R$%.2f\n", valor_total);
-
-    printf("\nQual será a forma de pagamento?\n 1 - À vista \n 2 - Parcelado ");
-    scanf("%i", &forma_pagamento);
-
-    if (forma_pagamento == 1 && valor_total > 100){   //desconto de 10% para compras maiores que 100 e pagamento à vista
-        desconto = (valor_total * 10) /100;
-        valor_total = valor_total - desconto;
-        printf("\nO valor com desconto é: R$%.2f", valor_total);
-    }
-
-
-    //printf("\n\nEscolha uma data para retirar a compra em nossa loja: ");
-    //scanf("%i", &data_retirada);
+    while (resposta == 1);
 
 
 return 0;
