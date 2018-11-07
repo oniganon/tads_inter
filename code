@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <locale.h>
 #include <string.h>
+#include <time.h>
 
 typedef struct {   // STRUCT PARA ARMAZENAR OS DADOS DO PRODUTO
         char nome_prod[50], marca_prod[50], peso[50], litros[50];
@@ -14,7 +15,7 @@ typedef struct {   // STRUCT PARA GERAR O CUPOM FISCAL AO FINAL DA COMPRA
         float preco;
         int quantidade;
     }CupomFiscal;
-    
+
 void menu(){
 
     int i, z, x, j, opcao_menu;
@@ -209,7 +210,33 @@ void menu(){
 
 }
 
+void pagamento(){ //FUNÇÃO QUE IRÁ CALCULAR O PAGAMENTO DA COMPRA
+    
+    printf("Seu carrinho: ");
+    for(int i=0; i<=20; i++){
+        if(c[i].quantidade != 0){ //IMPRIME SOMENTE O QUE O USUARIO SELECIONOU E COMPROU SE FOR DIFERENTE DE 0
+            printf("\nR$%.2f----------Qtd:%d----------%s", c[i].preco, c[i].quantidade, c[i].nome_prod);
+            printf("\n");
+        }
+    }
 
+        printf("\nValor total da compra = R$%.2f\n", valor_total);
+
+        printf("\nSelecione a forma de pagamento digitando uma opção:\n 1 - À vista \n 2 - Parcelado ");
+        printf("\n");
+        scanf("%i", &forma_pagamento);
+
+    if (forma_pagamento == 1 && valor_total > 100){   //desconto de 10% para compras maiores que 100 reais e pagamento à vista
+        desconto = (valor_total * 10) /100;
+        valor_total = valor_total - desconto;
+        printf("\nO valor com desconto é: R$%.2f", valor_total);
+    }
+
+
+        //printf("\n\nEscolha uma data para retirar a compra em nossa loja: ");
+        //scanf("%i", &data_retirada);
+
+}
 
 int main(){
 
@@ -218,6 +245,7 @@ setlocale(LC_ALL, "Portuguese");
     char soun;
     int cont=0, opcao[10], data_retirada, forma_pagamento, unidades, cod_escolha, resposta;
     float valor_total=0, desconto;
+    time_t data_hoje;
 
 
                                 /* DECLARAÇÃO DOS PRODUTOS */
@@ -350,8 +378,8 @@ setlocale(LC_ALL, "Portuguese");
     p[20].codigo_prod = 20;
 
                                 /* FIM DECLARAÇÃO DOS PRODUTOS */
-                            
-    CupomFiscal c[21] = {0}; //ARRAY PARA CUPOM FISCAL COM VALORES EM 0
+
+    CupomFiscal c[21] = {0}; //ARRAY PARA CUPOM FISCAL COM VALORES EM 0 PARA PRINT POSTERIOR
 
     do{
 
@@ -370,205 +398,37 @@ setlocale(LC_ALL, "Portuguese");
             scanf ("%i", &unidades);
 
             cont = cont + 1 * unidades;     //contador para saber quantos produtos foram escolhidos
-            
-            
-            if (cod_escolha == 1){
-                valor_total = valor_total + p[1].preco * unidades; // CALCULO DO VALOR TOTAL DOS PRODUTOS ESCOLHIDOS
-                memcpy(&c[1].preco, &p[1].preco, sizeof(p[1].preco)+1);
-                memcpy(&c[1].quantidade, &unidades, sizeof(unidades)+1);
-                memcpy(&c[1].nome_prod, &p[1].nome_prod, strlen(p[1].nome_prod)+1);
-                memcpy(&c[1].marca_prod, &p[1].marca_prod, strlen(p[1].marca_prod)+1);
-                memcpy(&c[1].peso, &p[1].peso, strlen(p[1].peso)+1);
-                memcpy(&c[1].litros, &p[1].litros, strlen(p[1].litros)+1);
-            }if (cod_escolha == 2){
-                valor_total = valor_total + p[2].preco * unidades;
-                memcpy(&c[2].preco, &p[2].preco, sizeof(p[2].preco)+1);
-                memcpy(&c[2].quantidade, &unidades, sizeof(unidades)+1);
-                memcpy(&c[2].nome_prod, &p[2].nome_prod, strlen(p[2].nome_prod)+1);
-                memcpy(&c[2].marca_prod, &p[2].marca_prod, strlen(p[2].marca_prod)+1);
-                memcpy(&c[2].peso, &p[2].peso, strlen(p[2].peso)+1);
-                memcpy(&c[2].litros, &p[2].litros, strlen(p[2].litros)+1);
-            }if (cod_escolha == 3){
-                valor_total = valor_total + p[3].preco * unidades;
-                memcpy(&c[3].preco, &p[3].preco, sizeof(p[3].preco)+1);
-                memcpy(&c[3].quantidade, &unidades, sizeof(unidades)+1);
-                memcpy(&c[3].nome_prod, &p[3].nome_prod, strlen(p[3].nome_prod)+1);
-                memcpy(&c[3].marca_prod, &p[3].marca_prod, strlen(p[3].marca_prod)+1);
-                memcpy(&c[3].peso, &p[3].peso, strlen(p[3].peso)+1);
-                memcpy(&c[3].litros, &p[3].litros, strlen(p[3].litros)+1);
-            }if (cod_escolha == 4){
-                valor_total = valor_total + p[4].preco * unidades;
-                memcpy(&c[4].preco, &p[4].preco, sizeof(p[4].preco)+1);
-                memcpy(&c[4].quantidade, &unidades, sizeof(unidades)+1);
-                memcpy(&c[4].nome_prod, &p[4].nome_prod, strlen(p[4].nome_prod)+1);
-                memcpy(&c[4].marca_prod, &p[4].marca_prod, strlen(p[4].marca_prod)+1);
-                memcpy(&c[4].peso, &p[4].peso, strlen(p[4].peso)+1);
-                memcpy(&c[4].litros, &p[4].litros, strlen(p[4].litros)+1);
-            }if (cod_escolha == 5){
-                valor_total = valor_total + p[5].preco * unidades;
-                memcpy(&c[5].preco, &p[5].preco, sizeof(p[5].preco)+1);
-                memcpy(&c[5].quantidade, &unidades, sizeof(unidades)+1);
-                memcpy(&c[5].nome_prod, &p[5].nome_prod, strlen(p[5].nome_prod)+1);
-                memcpy(&c[5].marca_prod, &p[5].marca_prod, strlen(p[5].marca_prod)+1);
-                memcpy(&c[5].peso, &p[5].peso, strlen(p[5].peso)+1);
-                memcpy(&c[5].litros, &p[5].litros, strlen(p[5].litros)+1);
-            }if (cod_escolha == 6){
-                valor_total = valor_total + p[6].preco * unidades;
-                memcpy(&c[6].preco, &p[6].preco, sizeof(p[6].preco)+1);
-                memcpy(&c[6].quantidade, &unidades, sizeof(unidades)+1);
-                memcpy(&c[6].nome_prod, &p[6].nome_prod, strlen(p[6].nome_prod)+1);
-                memcpy(&c[6].marca_prod, &p[6].marca_prod, strlen(p[6].marca_prod)+1);
-                memcpy(&c[6].peso, &p[6].peso, strlen(p[6].peso)+1);
-                memcpy(&c[6].litros, &p[6].litros, strlen(p[6].litros)+1);
-            }if (cod_escolha == 7){
-                valor_total = valor_total + p[7].preco * unidades;
-                memcpy(&c[7].preco, &p[7].preco, sizeof(p[7].preco)+1);
-                memcpy(&c[7].quantidade, &unidades, sizeof(unidades)+1);
-                memcpy(&c[7].nome_prod, &p[7].nome_prod, strlen(p[7].nome_prod)+1);
-                memcpy(&c[7].marca_prod, &p[7].marca_prod, strlen(p[7].marca_prod)+1);
-                memcpy(&c[7].peso, &p[7].peso, strlen(p[7].peso)+1);
-                memcpy(&c[7].litros, &p[7].litros, strlen(p[7].litros)+1);
-            }if (cod_escolha == 8){
-                valor_total = valor_total + p[8].preco * unidades;
-                memcpy(&c[8].preco, &p[8].preco, sizeof(p[8].preco)+1);
-                memcpy(&c[8].quantidade, &unidades, sizeof(unidades)+1);
-                memcpy(&c[8].nome_prod, &p[8].nome_prod, strlen(p[8].nome_prod)+1);
-                memcpy(&c[8].marca_prod, &p[8].marca_prod, strlen(p[8].marca_prod)+1);
-                memcpy(&c[8].peso, &p[8].peso, strlen(p[8].peso)+1);
-                memcpy(&c[8].litros, &p[8].litros, strlen(p[8].litros)+1);
-            }if (cod_escolha == 9){
-                valor_total = valor_total + p[9].preco * unidades;
-                memcpy(&c[9].preco, &p[9].preco, sizeof(p[9].preco)+1);
-                memcpy(&c[9].quantidade, &unidades, sizeof(unidades)+1);
-                memcpy(&c[9].nome_prod, &p[9].nome_prod, strlen(p[9].nome_prod)+1);
-                memcpy(&c[9].marca_prod, &p[9].marca_prod, strlen(p[9].marca_prod)+1);
-                memcpy(&c[9].peso, &p[9].peso, strlen(p[9].peso)+1);
-                memcpy(&c[9].litros, &p[9].litros, strlen(p[9].litros)+1);
-            }if (cod_escolha == 10){
-                valor_total = valor_total + p[10].preco * unidades;
-                memcpy(&c[10].preco, &p[10].preco, sizeof(p[10].preco)+1);
-                memcpy(&c[10].quantidade, &unidades, sizeof(unidades)+1);
-                memcpy(&c[10].nome_prod, &p[10].nome_prod, strlen(p[10].nome_prod)+1);
-                memcpy(&c[10].marca_prod, &p[10].marca_prod, strlen(p[10].marca_prod)+1);
-                memcpy(&c[10].peso, &p[10].peso, strlen(p[10].peso)+1);
-                memcpy(&c[10].litros, &p[10].litros, strlen(p[10].litros)+1);
-            }if (cod_escolha == 11){
-                valor_total = valor_total + p[11].preco * unidades;
-                memcpy(&c[11].preco, &p[11].preco, sizeof(p[11].preco)+1);
-                memcpy(&c[11].quantidade, &unidades, sizeof(unidades)+1);
-                memcpy(&c[11].nome_prod, &p[11].nome_prod, strlen(p[11].nome_prod)+1);
-                memcpy(&c[11].marca_prod, &p[11].marca_prod, strlen(p[11].marca_prod)+1);
-                memcpy(&c[11].peso, &p[11].peso, strlen(p[11].peso)+1);
-                memcpy(&c[11].litros, &p[11].litros, strlen(p[11].litros)+1);
-            }if (cod_escolha == 12){
-                valor_total = valor_total + p[12].preco * unidades;
-                memcpy(&c[12].preco, &p[12].preco, sizeof(p[12].preco)+1);
-                memcpy(&c[12].quantidade, &unidades, sizeof(unidades)+1);
-                memcpy(&c[12].nome_prod, &p[12].nome_prod, strlen(p[12].nome_prod)+1);
-                memcpy(&c[12].marca_prod, &p[12].marca_prod, strlen(p[12].marca_prod)+1);
-                memcpy(&c[12].peso, &p[12].peso, strlen(p[12].peso)+1);
-                memcpy(&c[12].litros, &p[12].litros, strlen(p[12].litros)+1);
-            }if (cod_escolha == 13){
-                valor_total = valor_total + p[13].preco * unidades;
-                memcpy(&c[13].preco, &p[13].preco, sizeof(p[13].preco)+1);
-                memcpy(&c[13].quantidade, &unidades, sizeof(unidades)+1);
-                memcpy(&c[13].nome_prod, &p[13].nome_prod, strlen(p[13].nome_prod)+1);
-                memcpy(&c[13].marca_prod, &p[13].marca_prod, strlen(p[13].marca_prod)+1);
-                memcpy(&c[13].peso, &p[13].peso, strlen(p[13].peso)+1);
-                memcpy(&c[13].litros, &p[13].litros, strlen(p[13].litros)+1);
-            }if (cod_escolha == 14){
-                valor_total = valor_total + p[14].preco * unidades;
-                memcpy(&c[14].preco, &p[14].preco, sizeof(p[14].preco)+1);
-                memcpy(&c[14].quantidade, &unidades, sizeof(unidades)+1);
-                memcpy(&c[14].nome_prod, &p[14].nome_prod, strlen(p[14].nome_prod)+1);
-                memcpy(&c[14].marca_prod, &p[14].marca_prod, strlen(p[14].marca_prod)+1);
-                memcpy(&c[14].peso, &p[14].peso, strlen(p[14].peso)+1);
-                memcpy(&c[14].litros, &p[14].litros, strlen(p[14].litros)+1);
-            }if (cod_escolha == 15){
-                valor_total = valor_total + p[15].preco * unidades;
-                memcpy(&c[15].preco, &p[15].preco, sizeof(p[15].preco)+1);
-                memcpy(&c[15].quantidade, &unidades, sizeof(unidades)+1);
-                memcpy(&c[15].nome_prod, &p[15].nome_prod, strlen(p[15].nome_prod)+1);
-                memcpy(&c[15].marca_prod, &p[15].marca_prod, strlen(p[15].marca_prod)+1);
-                memcpy(&c[15].peso, &p[15].peso, strlen(p[15].peso)+1);
-                memcpy(&c[15].litros, &p[15].litros, strlen(p[15].litros)+1);
-            }if (cod_escolha == 16){
-                valor_total = valor_total + p[16].preco * unidades;
-                memcpy(&c[16].preco, &p[16].preco, sizeof(p[16].preco)+1);
-                memcpy(&c[16].quantidade, &unidades, sizeof(unidades)+1);
-                memcpy(&c[16].nome_prod, &p[16].nome_prod, strlen(p[16].nome_prod)+1);
-                memcpy(&c[16].marca_prod, &p[16].marca_prod, strlen(p[16].marca_prod)+1);
-                memcpy(&c[16].peso, &p[16].peso, strlen(p[16].peso)+1);
-                memcpy(&c[16].litros, &p[16].litros, strlen(p[16].litros)+1);
-            }if (cod_escolha == 17){
-                valor_total = valor_total + p[17].preco * unidades;
-                memcpy(&c[17].preco, &p[17].preco, sizeof(p[17].preco)+1);
-                memcpy(&c[17].quantidade, &unidades, sizeof(unidades)+1);
-                memcpy(&c[17].nome_prod, &p[17].nome_prod, strlen(p[17].nome_prod)+1);
-                memcpy(&c[17].marca_prod, &p[17].marca_prod, strlen(p[17].marca_prod)+1);
-                memcpy(&c[17].peso, &p[17].peso, strlen(p[17].peso)+1);
-                memcpy(&c[17].litros, &p[17].litros, strlen(p[17].litros)+1);
-            }if (cod_escolha == 18){
-                valor_total = valor_total + p[18].preco * unidades;
-                memcpy(&c[18].preco, &p[18].preco, sizeof(p[18].preco)+1);
-                memcpy(&c[18].quantidade, &unidades, sizeof(unidades)+1);
-                memcpy(&c[18].nome_prod, &p[18].nome_prod, strlen(p[18].nome_prod)+1);
-                memcpy(&c[18].marca_prod, &p[18].marca_prod, strlen(p[18].marca_prod)+1);
-                memcpy(&c[18].peso, &p[18].peso, strlen(p[18].peso)+1);
-                memcpy(&c[18].litros, &p[18].litros, strlen(p[18].litros)+1);
-            }if (cod_escolha == 19){
-                valor_total = valor_total + p[19].preco * unidades;
-                memcpy(&c[19].preco, &p[19].preco, sizeof(p[19].preco)+1);
-                memcpy(&c[19].quantidade, &unidades, sizeof(unidades)+1);
-                memcpy(&c[19].nome_prod, &p[19].nome_prod, strlen(p[19].nome_prod)+1);
-                memcpy(&c[19].marca_prod, &p[19].marca_prod, strlen(p[19].marca_prod)+1);
-                memcpy(&c[19].peso, &p[19].peso, strlen(p[19].peso)+1);
-                memcpy(&c[19].litros, &p[19].litros, strlen(p[19].litros)+1);
-            }if (cod_escolha == 20){
-                valor_total = valor_total + p[20].preco * unidades;
-                memcpy(&c[20].preco, &p[20].preco, sizeof(p[20].preco)+1);
-                memcpy(&c[20].quantidade, &unidades, sizeof(unidades)+1);
-                memcpy(&c[20].nome_prod, &p[20].nome_prod, strlen(p[20].nome_prod)+1);
-                memcpy(&c[20].marca_prod, &p[20].marca_prod, strlen(p[20].marca_prod)+1);
-                memcpy(&c[20].peso, &p[20].peso, strlen(p[20].peso)+1);
-                memcpy(&c[20].litros, &p[20].litros, strlen(p[20].litros)+1);
+
+            for (int ii=1; ii<=20; ii++){
+                if(cod_escolha == ii){
+                    valor_total = valor_total + p[ii].preco * unidades; // CALCULO DO VALOR TOTAL DOS PRODUTOS ESCOLHIDOS
+                    memcpy(&c[ii].preco, &p[ii].preco, sizeof(p[ii].preco)+1);
+                    memcpy(&c[ii].quantidade, &unidades, sizeof(unidades)+1);
+                    memcpy(&c[ii].nome_prod, &p[ii].nome_prod, strlen(p[ii].nome_prod)+1);
+                    memcpy(&c[ii].marca_prod, &p[ii].marca_prod, strlen(p[ii].marca_prod)+1);
+                    memcpy(&c[ii].peso, &p[ii].peso, strlen(p[ii].peso)+1);
+                    memcpy(&c[ii].litros, &p[ii].litros, strlen(p[ii].litros)+1);
+                }
             }
-            
+
+            //SUBMENU DENTRO DA COMPRA
             printf("\nEscolha uma opção: \n1 - Voltar para o menu \n2 - Adcionar ao carrinho outro produto da mesma categoria \n3 - Finalizar a compra\n ");
             scanf("%i", &resposta);
-
-            if(resposta == 1){
-
-                system("cls"); //LIMPA A TELA
-
+            
+            
+            //VALIDAÇÃO DAS OPÇÕES DO SUBMENU
+            if (resposta >= 4){
+                printf("\nOPÇÃO INVÁLIDA! Escolha novamente: \n");
+                scanf("i%", %resposta);
             }
+            
+            if(resposta == 1){
+                system("cls"); //LIMPA A TELA
+            } 
 
             if(resposta == 3){
                 system("cls"); //LIMPA A TELA
-                
-                printf("Produtos comprados: ");
-                for(int i=0; i<=20; i++){
-                    if(c[i].quantidade != 0){
-                    printf("\n%s,    R$%.2f,   Qtd: %d", c[i].nome_prod, c[i].preco, c[i].quantidade);
-                    }
-                }
-
-                printf("\nValor total da compra = R$%.2f\n", valor_total);
-
-                printf("\nQual será a forma de pagamento?\n 1 - À vista \n 2 - Parcelado ");
-                scanf("%i", &forma_pagamento);
-
-                if (forma_pagamento == 1 && valor_total > 100){   //desconto de 10% para compras maiores que 100 e pagamento à vista
-                    desconto = (valor_total * 10) /100;
-                    valor_total = valor_total - desconto;
-                    printf("\nO valor com desconto é: R$%.2f", valor_total);
-                }
-
-
-                //printf("\n\nEscolha uma data para retirar a compra em nossa loja: ");
-                //scanf("%i", &data_retirada);
-
-
+                pagamento();
             }
 
         }
@@ -580,3 +440,4 @@ setlocale(LC_ALL, "Portuguese");
 
 return 0;
 }
+
