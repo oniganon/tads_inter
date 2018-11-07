@@ -4,6 +4,8 @@
 #include <string.h>
 #include <time.h>
 
+void pagamento(); //PRE DECLARAÇAO DE FUNÇAO
+
 typedef struct {   // STRUCT PARA ARMAZENAR OS DADOS DO PRODUTO
         char nome_prod[50], marca_prod[50], peso[50], litros[50];
         int codigo_prod;
@@ -210,44 +212,14 @@ void menu(){
 
 }
 
-void pagamento(){ //FUNÇÃO QUE IRÁ CALCULAR O PAGAMENTO DA COMPRA
-    
-    printf("Seu carrinho: ");
-    for(int i=0; i<=20; i++){
-        if(c[i].quantidade != 0){ //IMPRIME SOMENTE O QUE O USUARIO SELECIONOU E COMPROU SE FOR DIFERENTE DE 0
-            printf("\nR$%.2f----------Qtd:%d----------%s", c[i].preco, c[i].quantidade, c[i].nome_prod);
-            printf("\n");
-        }
-    }
-
-        printf("\nValor total da compra = R$%.2f\n", valor_total);
-
-        printf("\nSelecione a forma de pagamento digitando uma opção:\n 1 - À vista \n 2 - Parcelado ");
-        printf("\n");
-        scanf("%i", &forma_pagamento);
-
-    if (forma_pagamento == 1 && valor_total > 100){   //desconto de 10% para compras maiores que 100 reais e pagamento à vista
-        desconto = (valor_total * 10) /100;
-        valor_total = valor_total - desconto;
-        printf("\nO valor com desconto é: R$%.2f", valor_total);
-    }
-
-
-        //printf("\n\nEscolha uma data para retirar a compra em nossa loja: ");
-        //scanf("%i", &data_retirada);
-
-}
-
 int main(){
 
 setlocale(LC_ALL, "Portuguese");
 
-    char soun;
+    //char soun;
     int cont=0, opcao[10], data_retirada, forma_pagamento, unidades, cod_escolha, resposta;
     float valor_total=0, desconto;
-    time_t data_hoje;
-
-
+    //time_t data_hoje;
                                 /* DECLARAÇÃO DOS PRODUTOS */
 
         Produtos p[21];
@@ -414,17 +386,17 @@ setlocale(LC_ALL, "Portuguese");
             //SUBMENU DENTRO DA COMPRA
             printf("\nEscolha uma opção: \n1 - Voltar para o menu \n2 - Adcionar ao carrinho outro produto da mesma categoria \n3 - Finalizar a compra\n ");
             scanf("%i", &resposta);
-            
-            
+
+
             //VALIDAÇÃO DAS OPÇÕES DO SUBMENU
             if (resposta >= 4){
                 printf("\nOPÇÃO INVÁLIDA! Escolha novamente: \n");
-                scanf("i%", %resposta);
+                scanf("%d", &resposta);
             }
-            
+
             if(resposta == 1){
                 system("cls"); //LIMPA A TELA
-            } 
+            }
 
             if(resposta == 3){
                 system("cls"); //LIMPA A TELA
@@ -439,5 +411,55 @@ setlocale(LC_ALL, "Portuguese");
 
 
 return 0;
+}
+
+void pagamento(){ //FUNÇÃO QUE IRÁ CALCULAR O PAGAMENTO DA COMPRA
+    int day, month, year, parcelas, parcela, data_retirada, forma_pagamento, unidades, cod_escolha, resposta;
+    float valor_total=0, desconto;
+
+    CupomFiscal c[21] = {0}; //ARRAY PARA CUPOM FISCAL COM VALORES EM 0 PARA PRINT POSTERIOR
+
+    //UTILIZANDO A BIBLIOTECA TIME.H PODEMOS REALIZAR OPERAÇÕES USANDO A DATA E HORA LOCAL
+    time_t now;
+    time(&now);
+    struct tm *local = localtime(&now);
+    day = local->tm_mday;                       //DIA DO MES (1 A 31)
+    month = local->tm_mon +1;                   //MES DO ANO (0 A 11)
+    year = local->tm_year+1900;                 //ANO DESDE 1900
+
+    printf("Seu carrinho: ");
+    for(int i=0; i<=20; i++){
+        if(c[i].quantidade != 0){ //IMPRIME SOMENTE O QUE O USUARIO SELECIONOU E COMPROU SE FOR DIFERENTE DE 0
+            printf("\nR$%.2f----------Qtd:%d----------%s", c[i].preco, c[i].quantidade, c[i].nome_prod);
+            printf("\n");
+        }
+    }
+        printf("\nValor total da compra = R$%.2f\n", valor_total);
+        printf("\nSelecione a forma de pagamento digitando uma opção:\n >1 - À vista \n >2 - Parcelado (ate 3x s/ juros) ");
+        printf("\n");
+        scanf("%i", &forma_pagamento);
+        printf("\n\nDaqui a quantos dias deseja retirar a compra? ");
+        scanf("%i", &data_retirada);
+
+        day = local->tm_mday + data_retirada;
+        mktime(&now);
+
+
+    //CALCULO DOS VALORES FINAIS E DATAS DE RETIRADA
+    if (forma_pagamento == 1 && valor_total > 100 && data_retirada>=30){   //desconto de 10% para compras maiores que 100 reais e pagamento à vista
+        desconto = (valor_total * 10) /100;
+        valor_total = valor_total - desconto;
+        printf("\nO valor com desconto é: R$%.2f e a retirada é em %02d/%02d/%02d", valor_total, day, month, year);
+    }else if(forma_pagamento == 2){
+        printf("Em quantas vezes deseja parcelar a compra? ");
+        scanf("%d", &parcelas);
+        parcela=valor_total/parcelas;
+        printf("\nValor total da compra: R$%.2f", valor_total);
+        printf("\nQtd de parcelas: %d\nValor da parcela: %d", parcelas, parcela);
+        printf("\nData de retirada: %02d/%02d/%02d", day, month, year);
+    }else{
+        printf("Opcao invalida! Selecione novamente: ");
+        scanf("%i", &forma_pagamento);
+    }
 }
 
